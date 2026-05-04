@@ -37,6 +37,10 @@
 
 `conference-styles/<style-id>/style.md` 是后续扩展用的会议风格文件，例如 `conference-styles/emnlp2025/style.md`。
 
+当前已包含的会议风格文件：
+
+- `ai-paper-writing-zh/conference-styles/acl2025-agent/style.md`：基于 ACL2025 与 EMNLP2025 agent/evolve deep research 报告，总结 agent/evolve 方向写作偏好。
+
 ## 安装
 
 默认安装到 `~/.agents/skills`：
