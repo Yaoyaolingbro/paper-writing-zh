@@ -1,0 +1,22 @@
+.DS_Store
+**/.DS_Store
+
+# Local research corpora and generated deep-research artifacts.
+history_conference_papers/
+
+# Conversation scratch files.
+codex_context.md
+
+# Large paper artifacts.
+*.pdf
+*.zip
+
+# LaTeX build outputs.
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
