@@ -49,11 +49,17 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-shopt -s nullglob
-skill_files=("$ROOT_DIR"/*/SKILL.md)
+skill_dirs=("$ROOT_DIR/ai-paper-writing-zh")
 
-if [[ ${#skill_files[@]} -eq 0 ]]; then
-  echo "error: no root-level skill directories found" >&2
+for skill_dir in "${skill_dirs[@]}"; do
+  if [[ ! -f "$skill_dir/SKILL.md" ]]; then
+    echo "error: missing skill entry: $skill_dir/SKILL.md" >&2
+    exit 1
+  fi
+done
+
+if [[ ${#skill_dirs[@]} -eq 0 ]]; then
+  echo "error: no skills configured for installation" >&2
   exit 1
 fi
 
@@ -63,8 +69,7 @@ if [[ "$DRY_RUN" -eq 0 ]]; then
   mkdir -p "$DEST_DIR"
 fi
 
-for skill_file in "${skill_files[@]}"; do
-  skill_dir="$(dirname "$skill_file")"
+for skill_dir in "${skill_dirs[@]}"; do
   skill_name="$(basename "$skill_dir")"
   target_dir="$DEST_DIR/$skill_name"
 
