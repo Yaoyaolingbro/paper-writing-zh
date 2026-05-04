@@ -1,8 +1,11 @@
 .DS_Store
 **/.DS_Store
 
-# Local research corpora and generated deep-research artifacts.
-history_conference_papers/
+# Local research corpora: keep Markdown reports/prompts, ignore large artifacts.
+history_conference_papers/**
+!history_conference_papers/**/
+!history_conference_papers/*.md
+!history_conference_papers/**/*.md
 
 # Conversation scratch files.
 codex_context.md
