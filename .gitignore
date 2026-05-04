@@ -10,6 +10,13 @@ history_conference_papers/**
 # Conversation scratch files.
 codex_context.md
 
+# Python/runtime outputs.
+__pycache__/
+*.pyc
+reports/
+reference_verification.json
+reference_verification.md
+
 # Large paper artifacts.
 *.pdf
 *.zip

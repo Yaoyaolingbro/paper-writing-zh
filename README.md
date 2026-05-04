@@ -33,6 +33,14 @@
 │       ├── conference-paper-structure.md
 │       ├── latex-comment-style.md
 │       └── revision-checklists.md
+├── reference-verifier/
+│   ├── SKILL.md
+│   ├── README.md
+│   ├── scripts/
+│   │   └── verify_references.py
+│   └── templates/
+│       ├── reference_verification_report.md
+│       └── suspicious_reference_item.md
 ```
 
 `conference-styles/<style-id>/style.md` 是后续扩展用的会议风格文件，例如 `conference-styles/emnlp2025/style.md`。
@@ -55,9 +63,10 @@
 CODEX_SKILLS_DIR="$HOME/.codex/skills" ./install.sh
 ```
 
-脚本只安装主 skill：
+脚本会安装两个根级 skill：
 
 - `ai-paper-writing-zh`
+- `reference-verifier`
 
 会议风格文件会作为 `ai-paper-writing-zh` 的子目录一并安装。
 
@@ -87,7 +96,7 @@ CODEX_SKILLS_DIR="$HOME/.codex/skills" ./install.sh
 3. 让 Codex 读取 deep research 报告和 `create-paper-style.md`，自动创建新的 `ai-paper-writing-zh/conference-styles/<style-id>/style.md`。
 4. 在主写作流程中，根据目标会议读取对应 style 文件，调整 abstract、introduction、related work、experiments 和 limitation 的写法。
 
-`history_conference_papers/` 是本地研究资料目录，默认不纳入 git。
+`history_conference_papers/` 中的 Markdown 调研报告会纳入 git；PDF、zip 和 `.DS_Store` 等大文件或本地文件默认忽略。
 
 ## 写作原则
 
@@ -102,3 +111,21 @@ CODEX_SKILLS_DIR="$HOME/.codex/skills" ./install.sh
 新增会议风格文件时，应优先基于历史论文和 deep research 报告总结“写作偏好”和“审稿风险”，不要把历史论文中的具体技术结论迁移到当前论文中。
 
 会议风格文件只负责调整写作风格和叙事偏好，不能覆盖 `ai-paper-writing-zh/references/fact-todo-policy.md` 中的事实约束。
+
+## 参考文献真实性校验
+
+`reference-verifier` 用于检查论文参考文献和 BibTeX 是否存在 hallucinated references、错误 DOI、标题作者年份不匹配、venue 错误、arXiv/正式版混淆等问题。
+
+示例：
+
+```bash
+python reference-verifier/scripts/verify_references.py --input refs.bib --out-dir reports
+python reference-verifier/scripts/verify_references.py --input references.txt --citing-year 2025 --out-dir reports
+```
+
+输出：
+
+- `reports/reference_verification.json`
+- `reports/reference_verification.md`
+
+该 skill 使用 Crossref、OpenAlex、Semantic Scholar、DBLP 和 arXiv 作为主要证据源。Google Scholar 只建议用于人工复核，不作为自动化主流程。
