@@ -49,10 +49,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-skill_dirs=(
-  "$ROOT_DIR/ai-paper-writing-zh"
-  "$ROOT_DIR/reference-verifier"
-)
+skill_dirs=("$ROOT_DIR/ai-paper-writing-zh")
 
 for skill_dir in "${skill_dirs[@]}"; do
   if [[ ! -f "$skill_dir/SKILL.md" ]]; then

@@ -14,8 +14,6 @@ codex_context.md
 __pycache__/
 *.pyc
 reports/
-reference_verification.json
-reference_verification.md
 
 # Large paper artifacts.
 *.pdf
